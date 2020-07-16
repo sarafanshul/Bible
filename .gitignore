@@ -1,0 +1,8 @@
+*
+!*/
+!*.*
+/build/
+a.out
+header.tmp
+.vscode
+.exe
