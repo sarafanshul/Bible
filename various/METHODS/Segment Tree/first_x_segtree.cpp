@@ -62,18 +62,20 @@ struct segtree {
 		return check_r(2*x + 2 ,l);
 	}
 
-	// O(log(log(N)))
-	long long find_above(int v ,int l ,int x){
-		if (x >= (size - 1)){
-			if (v <= maxs[x]) return x - size + 1;
-			return -1;
+	long long find_above(int v ,int l ,int x ,int lx ,int rx){
+		if (maxs[x] < v) return -1;
+		if (rx <= l) return -1; // check condition for { L } 
+		if (rx - lx == 1) return lx;
+		int m = (lx + rx) / 2;
+		int res = find_above(v ,l ,2*x + 1 ,lx ,m);
+		if (res == -1){
+			res = find_above(v ,l ,2*x + 2 ,m ,rx);
 		}
-		if (v <= maxs[2*x + 1] && check_r(2*x + 1 ,l)) return find_above(v , l ,2*x + 1);
-		return find_above(v ,l ,2*x + 2);
+		return res;	
 	}
 
 	long long find_above(int v ,int l){
-		return find_above(v ,l ,0);
+		return find_above(v ,l ,0 ,0 ,size);
 	}
 };
 
