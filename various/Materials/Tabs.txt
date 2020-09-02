@@ -1,0 +1,97 @@
+1-9-20
+
+== Algorithm GYM ==
+	https://codeforces.com/blog/entry/16221?f0a28=1
+
+Youtube
+
+	WilliamFiset
+	 https://www.youtube.com/watch?v=jsmMtJpPnhU&list=PLDV1Zeh2NRsDGO4--qE8yH72HFL1Km93P&index=29
+	Algorithms Live!
+	 https://www.youtube.com/watch?v=2PFl93WM_ao
+	Algorithm Thread
+	 https://www.youtube.com/playlist?list=PLZU0kmvryb_HZpDW2yfn-H-RxAu_ts6xq
+	Missing Semester
+	 https://www.youtube.com/watch?v=kgII-YWo3Zw
+	DSU 
+	 https://www.youtube.com/watch?v=ID00PMy0-vE
+	HLD
+	 https://www.youtube.com/watch?v=AeBrkNQhJhc
+	 https://www.youtube.com/watch?v=1PvT2d9lgqY
+
+
+GRAPHS
+
+	graphs
+	 https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions
+	HLD
+	 https://codeforces.com/blog/entry/81317
+	Ear Decomposition
+	 https://codeforces.com/blog/entry/80932
+	3d Convex Hull
+	 https://codeforces.com/blog/entry/81768
+
+
+DP
+
+	DP
+	 https://leetcode.com/discuss/general-discussion/662866/dp-for-beginners-problems-patterns-sample-solutions
+	Stocks
+	 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/most-consistent-ways-of-dealing-with-the-series-of-stock-problems
+	DP+ Bitmasking
+	 https://codeforces.com/blog/entry/81516
+	DP
+	 https://codeforces.com/blog/entry/67679
+	DP
+	 https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
+	DP
+	 https://leetcode.com/discuss/general-discussion/651719/how-to-solve-dp-string-template-and-4-steps-to-be-followed
+	CSES DP
+	 https://codeforces.com/blog/entry/70018
+	DP
+	 https://atcoder.jp/contests/dp/tasks
+	Binary search
+	 https://leetcode.com/discuss/general-discussion/786126/python-powerful-ultimate-binary-search-template-solved-many-problems
+	LIS 
+	 https://codeforces.com/blog/entry/13225
+
+
+Segment Tree
+
+	SegTree
+	 https://codeforces.com/blog/entry/18051
+	AlgoGym SegTree
+	 https://codeforces.com/blog/entry/15890
+
+
+
+win 1)
+
+algo
+https://cp-algorithms.com/
+
+
+Interval Scheuduling
+https://en.wikipedia.org/wiki/Interval_scheduling#Interval_Scheduling_Maximization
+
+Merge Sort Tree
+https://codeforces.com/blog/entry/73301
+Mo's Algorithm
+https://codeforces.com/blog/entry/81716
+Reservoir Sampling
+https://en.wikipedia.org/wiki/Reservoir_sampling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
