@@ -1,0 +1,44 @@
+https://codeforces.com/blog/entry/82226
+
+
+
+
+
+Let x is in binary and its gray code is y;
+Then this can be shown that y = x^(x>>1)
+Before proving this we would like to show that we can also recover x from gray code y as follow;
+Let us observe that (y>>1) = (x>>1)^(x>>2), 
+Similarly (y>>i) = (x>>i)^(x>>(i+1))
+Therefore x = x ^ (x>>1) ^ (x>>1) ^ (x>>2) ^ (x>>2) ^ … ^ (x>>(n-1)) ^ (x>>n)
+Where 2^n > x, 
+Thus x = y ^ (y>>1) ^ (y>>2) ^ (y>>(n-1))
+/*
+Now, let us focus how to prove y =  x ^ (x>>1)
+It is enough for us to prove that if y is such then hamming distance between y and y+1 is 1 (Gray code definition). 
+So, let us focus on the numbers from 0 to 2^n-2 (inclusive) , (we have excluded 2^n-1 because there is no further element to check I.e. 2^n-1+1 is 2^n overflow).
+As we said our number x is between 0 to 2^n-2, then there exist at least one zero bit in its binary representation. Let us write that ,
+*/
+x = bz … b(t+2) 0  1 1 1 1 1… 1
+Then let 0 is right most of all 0’s, at t_th position where 0<=t<=z
+Now x+1 = bz … b(t+2) 1 0 0 0 0 0 … 0
+
+
+ x       = bz b(z-1)… b(t+2)    0    1 1 1 1 1.. 1 
+ x>>1    = 0   bz   … b(t+3) b(t+2)  0 1 1 1 1.. 1
+----------------------------------------------------
+ y(xor) = cz c(z-1) … c(t+2)  c(t+1) 1 0 0 0.. 0 0
+
+/* So let us covert each x and x+1 to its corresponding y and y1 .
+
+Where cz= bz, c(z-1)= bz ^ b(z-1), and so on, at the end c(t+1) = b(t+2)
+*/
+Similary,
+x         = bz b(z-1).. b(t+2)    1    0 0 0 0 0.. 0
+x>>1      = 0   bz  ..  b(t+3) b(t+2)  1 0 0 0 0.. 0
+--------------------------------------------------------
+y1(xor)  = cz c(z-1) … c(t+2)  c’(t+1) 1 0 0 0 0.. 0
+/*
+We observe that only bit at t+1_th position changes all remains the same 
+c’(t+1) = 1 ^ b(t+2) = negation (b(t+2)) 
+And c(t+1) = b(t+2) 
+Thus hamming distance is 1.*/

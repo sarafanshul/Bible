@@ -1,0 +1,17 @@
+// https://stackoverflow.com/questions/10141841/difference-between-stdset-and-stdpriority-queue
+
+
+std::priority_queue allows to do the following:
+	Insert an element O(log n)
+	Get the smallest element O(1)
+	Erase the smallest element O(log n)
+
+while std::set has more possibilities:
+	Insert any element O(log n) and the constant is greater than in std::priority_queue
+	Find any element O(log n)
+	Find an element, >= than the one your are looking for O(log n) (lower_bound)
+	Erase any element O(log n)
+	Erase any element by its iterator O(1)
+	Move to previous/next element in sorted order O(1)
+	Get the smallest element O(1)
+	Get the largest element O(1)
