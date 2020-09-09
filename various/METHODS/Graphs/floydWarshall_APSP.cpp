@@ -20,7 +20,7 @@
 using namespace std;
 const size_t MAXN = 1e3 +7;
 
-// use a adjacency list { pathfrom [i-i => 0] ,[i-j => input] ,[else Infinite] }
+// use a adjacency matrix { pathfrom [i-i => 0] ,[i-j => input] ,[else Infinite] }
 int adj[MAXN][MAXN] ,p[MAXN][MAXN];
 int n ,m;
 
@@ -73,7 +73,6 @@ int32_t main() {
 	ios_base::sync_with_stdio(false); cin.tie(NULL);
 	memset(adj ,INT_MAX ,sizeof(adj));
 	memset(p ,-1 ,sizeof(p));
-	
 	for(int i = 0 ;i < MAXN ;i++) adj[i][i] = 0;
 
 	int u ,v ,w;

@@ -1,3 +1,5 @@
+const uint32_t MOD = 1e9+7;
+
 inline void fasterLLDivMod(unsigned long long x, unsigned y, unsigned &out_d, unsigned &out_m) {
     unsigned xh = (unsigned)(x >> 32), xl = (unsigned)x, d, m;
     #ifdef __GNUC__
@@ -17,7 +19,8 @@ inline void fasterLLDivMod(unsigned long long x, unsigned y, unsigned &out_d, un
     #endif
     out_d = d; out_m = m;
 }
-inline unsigned mod(unsigned long long x, unsigned y) {
+
+inline unsigned mod(unsigned long long x, unsigned y = MOD) {
     unsigned dummy, r;
     fasterLLDivMod(x, y, dummy, r);
     return r;

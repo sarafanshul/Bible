@@ -42,23 +42,18 @@ struct segtree {
 		sums[x] = sums[2*x + 1] + sums[2*x + 2];
 	}
 
-	void set(int i  ,int v){
-		set(i ,v ,0  ,0 ,size);
-	}
+	inline void set(int i  ,int v){set(i ,v ,0  ,0 ,size);}
 
 	long long sum(int l ,int r , int x ,int lx ,int rx){
-		// 3 cases
 		if (lx >= r || l >= rx) return 0;
 		if (lx >= l && rx <= r) return  sums[x];
 		int m = (lx + rx)/2;
 		long long s1 = sum(l ,r ,2*x + 1 ,lx ,m);
 		long long s2 = sum(l ,r ,2*x + 2 ,m ,rx);
-		return s1 + s2;  
+		return s1 + s2;
 	}
 
-	long long sum(int l ,int r){
-		return sum(l ,r ,0 ,0 ,size);
-	}
+	inline long long sum(int l ,int r){return sum(l ,r ,0 ,0 ,size);}
 };
 
 int main(){

@@ -1,7 +1,10 @@
 //  Kosaraju and Sharir Algorithm for SCC
 // https://cp-algorithms.com/graph/strongly-connected-components.html
-
-#pragma GCC optimize("O3")
+// https://www.youtube.com/watch?v=9Wbej7Fy5Lw
+//
+// #pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")  
+#pragma GCC target("avx,avx2,fma") 
 #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("unroll-loops")
 
@@ -32,6 +35,7 @@ void dfs1 (int v) {
 	order.push_back (v);
 }
 
+// for reverse graph
 void dfs2 (int v) {
 	used[v] = true;
 	component.push_back (v);
@@ -53,14 +57,15 @@ int32_t main() {
 		gr[b].push_back (a);
 	}
 
-	// used.assign (n, false);
+	// topological sort 
 	for (int i=0; i<n; ++i)
 		if (!used[i])
 			dfs1 (i);
-
+	
 	used.assign(n, false);
+	// since it is sorted ,If an element appears after v hence cycle(SCC)
 	for (int i=0; i<n; ++i) {
-		int v = order[n-1-i];
+		int v = order[n-1-i]; // for stack based ds
 		if (!used[v]) {
 			dfs2 (v);
 			// ... printing next component ...

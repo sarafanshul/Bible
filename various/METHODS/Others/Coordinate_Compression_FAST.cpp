@@ -1,6 +1,6 @@
-// coordinate compression (slower without pbds)
+// coordinate compression
 // Coordinate Compression is mainly used to map larger 
-// 	values to smaller values to remove the vacant space
+//  values to smaller values to remove the vacant space
 
 // https://www.quora.com/What-is-coordinate-compression-and-what-is-it-used-for
 
@@ -14,6 +14,7 @@
 
 // header(s)
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
 
 // custom aliases
 #define ALL(x) x.begin(),x.end()
@@ -30,14 +31,13 @@
 
 // namespaces
 using namespace std;
+using namespace __gnu_pbds;
 
 // global declerations
 const size_t MAXN = 1e5 +7;
 
-// FOR LONG LONG INTS (for unhackable hashing)
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
         x += 0x9e3779b97f4a7c15;
         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
@@ -50,7 +50,14 @@ struct custom_hash {
     }
 };
 
-unordered_map< long long, long long, custom_hash> _keys ,_orig;
+const uint64_t RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
+struct chash {
+    size_t operator()(uint64_t x) const { return x ^ RANDOM; }
+};
+
+// gp_hash_table<long long, long long ,custom_hash> _keys ,_orig; // slower
+gp_hash_table<long long, long long ,chash> _keys ,_orig; // faster (less secure)
+
 
 long long idx = 1;
 
@@ -68,9 +75,7 @@ void _store(T &v){
 
 template<class T = vector<long long>>
 void _extract(T &a){
-    for(size_t i = 0; i < a.size(); i++){
-        a[i] = _keys[a[i]]; // for appliting compression
-    }
+    for(size_t i = 0; i < a.size(); i++){a[i] = _keys[a[i]];}
 }
 
 template<class T = vector<long long>>

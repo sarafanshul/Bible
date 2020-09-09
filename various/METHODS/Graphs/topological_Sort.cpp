@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const size_t MAXN = 1e5+7;
+
 int n; // number of vertices
 vector<vector<int>> adj; // adjacency list of graph
 vector<bool> visited;
@@ -27,15 +29,14 @@ void topological_sort() {
 
 int main(){
 	int m ,a ,b;
+	ans.reserve(MAXN);
+	visited.reserve(MAXN);
 	cin >> n >> m;
 	adj.assign(n ,vector<int>(0));
 	while(m--){
 		cin >> a >> b;
 		adj[--a].push_back(--b);
 	}
-
-	// #for lexicographically smallest one
-    // for(int i = 0 ; i < n ;++i) sort(adj[i].begin() ,adj[i].end() ,greater<int>());
 
 	topological_sort();
 	

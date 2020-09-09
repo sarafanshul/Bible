@@ -1,3 +1,12 @@
+
+
+
+
+/// DOES NOT WORK FOR NEGATIVE   WEIGHTS
+
+
+
+
 // Solution to finding the shortest (and longest) path on a Directed Acyclic Graph (DAG) using a topological sort in combination with dynamic programming
 // for longest path 
 // 1) reverse all the edge-distances (a =  a*(-1) ) 
