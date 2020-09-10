@@ -1,5 +1,11 @@
 // https://cp-algorithms.com/graph/lca_binary_lifting.html
 // https://www.youtube.com/watch?v=MOy4UDjN8DM&list=PLZU0kmvryb_HZpDW2yfn-H-RxAu_ts6xq&index=10&t=1508s
+//
+// for distance between two nodes we will se lca of two nodes
+// 		if LCA(n1 ,n2) = a;
+// 		distance between n1 - n2 = h(n1 - a) + h(n2 - a)
+// 			(where h is the height array)
+
 #pragma GCC optimize("O3")
 #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("unroll-loops")
@@ -66,6 +72,11 @@ void preprocess(int root) {
     dfs(root, root);
 }
 
+int dist(int u ,int v){
+    int _lca = lca(u ,v);
+    return (h[u] - h[_lca]) + (h[v] - h[_lca]);
+}
+
 void check(){
 	int m ,q ,u ,v;
 	cin >> n >> m;
@@ -78,7 +89,7 @@ void check(){
 	cin >> q;
 	for(int i = 0; i < q ;i++){
 		cin >> u >> v;u--;v--;
-		cout << lca(u ,v)+1 << "\n"; 
+		cout << dist(u ,v) << "\n"; 
 	}
 }
 

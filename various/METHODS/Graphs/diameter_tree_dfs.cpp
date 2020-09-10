@@ -1,9 +1,6 @@
-//// ############ NOT THROUGHLY TESTED ##############
+/*
 
-
-/*// https://stackoverflow.com/questions/27994552/finding-the-center-of-the-diameter-of-a-graphtree-using-bfs
-
-// Using BFS
+// Using DFS
 
 // for Diameter
 To compute the diameter of a tree, you need first to 
@@ -12,23 +9,7 @@ To compute the diameter of a tree, you need first to
  furthest away from w, let's sat u. 
  The distance between w and u is the diameter of the tree.
 
-// for Center
-To make it actually find the center, 
- you can also remember the parent for each node 
- during your BFS. To do so, allocate an extra 
- array, say prev, and when you do
-	dist[nghbr] = dist[pos] + 1;
-also do
-	prev[nghbr] = pos;
-
-Then at the end of the second call to the function, 
- you can just descend bdist/2 times into the prev, something like:
-
-	center = lastVertex;
-	for (int i = 0; i + i < bdist; ++ i) center = prev[center];
-	
-//// ############ NOT THROUGHLY TESTED ##############
-// YES NOT WORKING PROPERLY
+// WORKING PROPERLY
 */
 #pragma GCC optimize("O3")
 #pragma comment(linker, "/stack:200000000")

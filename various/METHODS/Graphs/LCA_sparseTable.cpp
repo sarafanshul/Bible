@@ -10,96 +10,77 @@
 
 using namespace std;
 
-const uint32_t MOD = 1e9+7;
-const uint32_t MAXN = 105000;
-const uint32_t MAXLOG = 20;
-// euler tour
-vector<int> adj[MAXN];
-bool visited[MAXN] = {0};
-int color[MAXN] ,euler_tree[2*MAXN] ,depth[2*MAXN] ,last[MAXN];
-int n ,m ,idx = 0;
+#define all(c) ((c).begin()), ((c).end())
+#define TEST(s) if (!(s)) { cout << __LINE__ << " " << #s << endl; exit(-1); }
 
-// sparse table
-int table[MAXLOG][MAXN][2];
-int logs[MAXN];
+struct tree {
+  	int n;
+  	vector<vector<int>> adj;
+  	tree(int n) : n(n), adj(n) { }
+  	void add_edge(int s, int t) {
+		adj[s].push_back(t);
+		adj[t].push_back(s);
+  	}
+  	vector<int> pos, tour, depth;
+  	vector<vector<int>> table;
+  	int argmin(int i, int j) { return depth[i] < depth[j] ? i : j; }
+  	void rootify(int r) {
+		pos.resize(n);
+		function<void (int,int,int)> dfs = [&](int u, int p, int d) {
+	  	pos[u] = depth.size();
+	  	tour.push_back(u);
+	  	depth.push_back(d);
+	  	for (int v: adj[u]) {
+			if (v != p) {
+		  		dfs(v, u, d+1);
+		  		tour.push_back(u);
+		  		depth.push_back(d);
+			}
+	  	}
+		}; dfs(r, r, 0);
+		int logn = sizeof(int)*__CHAR_BIT__-1-__builtin_clz(tour.size()); // log2
+		table.resize(logn+1, vector<int>(tour.size()));
+		iota(all(table[0]), 0);
+		for (int h = 0; h < logn; ++h) 
+	  	for (int i = 0; i+(1<<h) < tour.size(); ++i)
+			table[h+1][i] = argmin(table[h][i], table[h][i+(1<<h)]);
+  	}
+  	int lca(int u, int v) {
+		int i = pos[u], j = pos[v]; if (i > j) swap(i, j);
+		int h = sizeof(int)*__CHAR_BIT__-1-__builtin_clz(j-i); // = log2
+		return i == j ? u : tour[argmin(table[h][i], table[h][j-(1<<h)])];
+  	}
+};
 
-void eulerTour(int v = 0 ,int d = 0){
-	visited[v] = 1;
-	depth[idx] = d;
-	last[v] = idx;
-	euler_tree[idx++] = v;
-	
-	for(int u : adj[v]){
-		if(!visited[u]){
-		    eulerTour(u ,d+1);
-		    depth[idx] = d;
-		    last[u] = idx-1;
-		    euler_tree[idx++] = v;
-		}
+void ck() {
+  int n;
+  scanf("%d", &n);
+  tree T(n);
+  for (int u = 0; u < n ; ++u) {
+	int k; 
+	scanf("%d", &k);
+	for (int j = 0; j < k; ++j) {
+	  int v;
+	  scanf("%d", &v);
+	  T.add_edge(u, --v);
 	}
+  }
+  T.rootify(0);
+  int q;
+  scanf("%d", &q);
+  for (int i = 0; i < q; ++i) {
+	int u, v;
+	scanf("%d %d", &u, &v);
+	printf("%d\n", T.lca(--u, --v)+1);
+  }
 }
 
-void computeLogs() {
-  	for (int i = 2; i < MAXN; i++) {
-		logs[i] = logs[i / 2] + 1;
-  	}
-}
-
-void buildSparseTable(int n) {
-	int curLen;
-  	for (int i = 0; i <= logs[n]; i++) {
-		curLen = 1 << i;
-		for (int j = 0; j + curLen <= n; j++) {
-	  		if (curLen == 1) {
-				table[i][j][0] = depth[j];
-				table[i][j][1] = j;
-	  		} else {
-				table[i][j][0] = min(table[i - 1][j][0], table[i - 1][j + (curLen / 2)][0]);
-				table[i][j][1] = (table[i - 1][j][0] == table[i][j][0])?table[i - 1][j][1]:table[i - 1][j + (curLen / 2)][1];
-	  		}
-		}
-  	}
-}
-
-int getMin(int l, int r) {
-    r++;
-  	int p = logs[r - l + 1];
-  	int pLen = 1 << p;
-  	int node_idx = (min(table[p][l][0], table[p][r - pLen + 1][0]) == table[p][l][0])?table[p][l][1]:table[p][r - pLen + 1][1];
-  	return euler_tree[node_idx];
-}
-
-void rmq(){
-    computeLogs();
-    buildSparseTable(2*n-1);
-}
-void lca(int u ,int v){
-    int a = getMin(min(last[u] ,last[v]) , max(last[u] ,last[v]));
-    cout << a << "\n";
-}
-
-int32_t main(){
-	ios_base::sync_with_stdio(false); cin.tie(NULL);
-	cin >> n >> m;
-	int u ,v;
-	for(int i = 0; i < m ;i++){
-		cin >> u >> v;
-		adj[u].PB(v);
-		adj[v].PB(u);
-	} // root is 1;
-	eulerTour();
-// 	// print()
-// 	for(int i = 0 ;i < 2*n-1 ;i++) cout << euler_tree[i] << " ";
-// 	cout << "\n";
-// 	for(int i = 0 ;i < 2*n-1 ;i++) cout << depth[i] << " ";
-// 	cout << "\n";
-// 	for(int i = 0 ;i < n ;i++) cout <<i<<" -> "<< last[i] << "\n";
-    int q;
-    cin >> q;
-    rmq();
-    for(int i = 0; i < q ; i++){
-        cin >> u >> v;
-        lca(u ,v);
-    }
+int main(){
+	int t = 0;
+	scanf("%d" ,&t);
+	for(int i = 1; i <= t ;i++){
+		printf("Case %d:\n" ,i);
+		ck();
+	}
 	return 0;
 }

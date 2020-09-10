@@ -9,6 +9,7 @@
     - [TWO](https://codeforces.com/blog/entry/13529?f0a28=1)
     - [THREE](https://codeforces.com/blog/entry/82283)
     - [FOUR](https://csacademy.com/lessons/)
+- [#General Ideas](https://codeforces.com/blog/entry/48417)
 - [Rolling Hashes](https://codeforces.com/blog/entry/60445)
 - [Mathematics Behind Rolling Hashes and Anti-Hash Tests](https://codeforces.com/blog/entry/60442) 
 - [Game Theory](https://codeforces.com/blog/entry/66040)
@@ -27,4 +28,5 @@
     - [CF-Blog-1](https://codeforces.com/blog/entry/15890)
 - [Pragmas GCC compilers](https://codeforces.com/blog/entry/66279?#comment-502778)
 - [Compiler and Linker flags for GCC](https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/)
+- [DSU on a Tree](https://codeforces.com/blog/entry/44351)
 ```
