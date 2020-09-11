@@ -1,22 +1,23 @@
-# KACTL
-
-This repo hosts KACTL, [KTH](https://en.wikipedia.org/wiki/KTH_Royal_Institute_of_Technology)'s ICPC team reference document.
+#<p align=center>  B I B L E
+[![Author](https://i.pinimg.com/originals/9a/4f/36/9a4f36a89e0305140122c1506c600002.jpg "Author")](https://github.com/sarafanshul "Author")
+<p align=center>This repo contains all Holy Algorithms.
 It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style programming competitions.
 
 See [kactl.pdf](https://github.com/kth-competitive-programming/kactl/blob/master/kactl.pdf) for the final, browsable version,
 and [content/](https://github.com/kth-competitive-programming/kactl/tree/master/content) for raw source code.
 
 ## Aspirations
+`Forked From Kth Official repo and continued with Gaining Knowledge`
 
-KACTL algorithms should be: useful, short, fast enough, well tested, and if relevant, readable and easy to modify.
+Algorithms should be: useful, short, fast enough, well tested, and if relevant, readable and easy to modify.
 They should *not* be overly generic, since code is manually typed and that just adds overhead.
 Due to space issues, we also exclude algorithms that are very common/simple (e.g., Dijkstra), or very uncommon (general weighted matching).
 
 If you feel that something is missing, could be cleaned up, or notice a bug, please file an issue or [send a pull request](https://help.github.com/articles/fork-a-repo/)!
 
-## Customizing KACTL
+## Customization
 
-While KACTL is usable as is, it's also easy to modify if you want to create a personalized copy.
+While this is usable as is, it's also easy to modify if you want to create a personalized copy.
 In particular, you may want to change the cover page, or make your own choice of algorithms to include --
 due to space concerns, not all algorithms in the repo are included in the pdf.
 You may also want to enable colored syntax highlighting.
@@ -43,7 +44,7 @@ hashing ignores whitespace and comments.
 
 ## Coding style
 
-KACTL uses a relatively terse coding style, with a handful of macros/typedefs defined in the
+This uses a relatively terse coding style, with a handful of macros/typedefs defined in the
 [template](https://github.com/kth-competitive-programming/kactl/blob/master/content/contest/template.cpp) that help shorten the code.
 Line width is 63 chars, with tabs for indentation (tab = 2 spaces in the pdf).
 
