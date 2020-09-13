@@ -1,33 +1,8 @@
-//// ############ NOT THROUGHLY TESTED ##############
-// only partial testing is done
+// Center of tree
 
 /*// https://stackoverflow.com/questions/27994552/finding-the-center-of-the-diameter-of-a-graphtree-using-bfs
 
-// Using BFS
-
-// for Diameter
-To compute the diameter of a tree, you need first to 
- choose an arbitrary vertex (let's say v), then find the vertex that is 
- furthest away from v (let's say w), and then find a vertex that is 
- furthest away from w, let's sat u. 
- The distance between w and u is the diameter of the tree.
-
-// for Center
-To make it actually find the center, 
- you can also remember the parent for each node 
- during your BFS. To do so, allocate an extra 
- array, say prev, and when you do
-	dist[nghbr] = dist[pos] + 1;
-also do
-	prev[nghbr] = pos;
-
-Then at the end of the second call to the function, 
- you can just descend bdist/2 times into the prev, something like:
-
-	center = lastVertex;
-	for (int i = 0; i + i < bdist; ++ i) center = prev[center];
-	
-//// ############ NOT THROUGHLY TESTED ##############
+center is always the middle vertex or middle two vertices in every longest path along the tree
 */
 #pragma GCC optimize("O3")
 #pragma comment(linker, "/stack:200000000")
@@ -49,6 +24,8 @@ using namespace std;
 
 const int MAXn = 1007 ,MAXm = 1001;
 
+
+// ===== not working use dfs one :( ======
 pair<int, int> biggest_dist(int n, int v, vector< vector<int> >& graph){
     vector<int> dist(n, INF);
     vector<int> prev(n, INF);

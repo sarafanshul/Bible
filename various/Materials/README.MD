@@ -35,4 +35,10 @@
 - [Compiler and Linker flags for GCC](https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/)
 - [DSU on a Tree](https://codeforces.com/blog/entry/44351)
 - [Bit-Hacks](https://graphics.stanford.edu/~seander/bithacks.html)
+- [DP on Trees](https://codeforces.com/blog/entry/20935)
+- [Centroid-Decomposition]()
+    - [Centroid Decomposition on a tree](https://codeforces.com/blog/entry/73707)
+    - [Explaination](https://www.youtube.com/watch?v=2izuGA8T8IE)
+    - [Implementation](https://codeforces.com/blog/entry/58025)
+    - [Algo-Live!](https://www.youtube.com/watch?v=3pk02p1-weU)
 ```
