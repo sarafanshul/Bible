@@ -41,4 +41,5 @@
     - [Explaination](https://www.youtube.com/watch?v=2izuGA8T8IE)
     - [Implementation](https://codeforces.com/blog/entry/58025)
     - [Algo-Live!](https://www.youtube.com/watch?v=3pk02p1-weU)
+- [DFS-Tree and its Applications](https://codeforces.com/blog/entry/68138)
 ```
