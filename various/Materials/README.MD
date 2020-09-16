@@ -9,6 +9,7 @@
     - [OEIS](https://oeis.org/)
     - [Stanford-ACM](https://github.com/jaehyunp/stanfordacm)
 - [Cp-Res]()
+    - [UASCO & CP-Guide](https://usaco.guide/)
     - [CF-Edu]()
     - [ONE](https://codeforces.com/blog/entry/57282)
     - [TWO](https://codeforces.com/blog/entry/13529?f0a28=1)
@@ -44,4 +45,5 @@
 - [DFS-Tree and its Applications](https://codeforces.com/blog/entry/68138)
 - [Way to Navigate Grid](https://codeforces.com/blog/entry/78827)
 - [always use const auto& inside for loops](https://codeforces.com/blog/entry/77847)
+- [Modular for beginers](https://codeforces.com/blog/entry/72527)
 ```
