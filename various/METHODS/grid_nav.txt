@@ -1,0 +1,6 @@
+const int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1}, dy[8] = {0, 1, 0, -1, -1, 1, -1, 1};
+
+inline bool ok(int x, int y) { return x >= 0 && y >= 0 && x < n && y < m; }    
+
+for(int i = 0; i < (4 or 8); i++) newX = x + dx[i]; newY = y + dy[i];
+
