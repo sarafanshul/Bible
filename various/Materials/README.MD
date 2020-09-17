@@ -46,4 +46,5 @@
 - [Way to Navigate Grid](https://codeforces.com/blog/entry/78827)
 - [always use const auto& inside for loops](https://codeforces.com/blog/entry/77847)
 - [Modular for beginers](https://codeforces.com/blog/entry/72527)
+- [All Andrew Stankevich Contests at Gym](https://codeforces.com/blog/entry/7770)
 ```
