@@ -2,7 +2,8 @@
 
 using namespace std;
 
-int fastExpo(int a, long long n, int MOD) {
+template<typename T = long long >
+T fastExpo(T a, T n, T MOD) {
     /// --> (a^n) % MOD
     int ans = 1;
     /// a = 2, n = 13 --> 2^13, ans = 1
