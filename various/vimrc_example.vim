@@ -164,6 +164,7 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
+" for tab retated issues
 filetype plugin indent on
 " show existing tab with 4 spaces width
 set tabstop=4
@@ -172,4 +173,7 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 "set expandtab
 
+" insert new line without wxiting normal mode
+nnoremap o o<Esc>
+nnoremap O O<Esc>
 
