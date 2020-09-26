@@ -1,11 +1,7 @@
-
-#pragma GCC optimize("Ofast")  // remove in mingw32 bit ;
+#pragma GCC optimize("Ofast")  
 #pragma GCC target("avx,avx2,fma") 
 #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("unroll-loops")
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/detail/standard_policies.hpp>
 #include <bits/stdc++.h>
 #define ALL(x) x.begin(),x.end()
 #define PB push_back
@@ -19,7 +15,6 @@
 // #define MAX LONG_LONG_MAX
 // #define MIN LONG_LONG_MIN
 
-using namespace __gnu_pbds;
 using namespace std;
 
 #ifdef CUST_DEBUG // </COMMENT> the {ostream operator} modification(for redifination conflicts) after endif
@@ -37,18 +32,23 @@ template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> c
 template<typename A> ostream& operator<<(ostream &cout,vector<A> const &v){cout<<"[";for(int i=0;i<v.size();i++){if(i)cout<<", ";cout<<v[i];}return cout<<"]";}
 template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p){cin>>p.F;return cin>>p.S;}
 
-typedef tree<
-	long long, // Key type
-	null_type, // Mapped-policy
-	less<long long>, // Key comparison functor
-	rb_tree_tag, // Specifies which underlying data structure to use
-	tree_order_statistics_node_update> // A policy for updating node invariants
-ordered_set;
+const long long MAXN = 1e6 +7;
 
-const long long MAXN = 1e5 +7;
+vector<ll> num_div(MAXN);
+vecotr<vector<ll>> divs(MAXN ,vector<ll>(0));
 
-void check(){
-	
+void num_divisors(){
+	for (int i = 1; i <= MAXN; i++)
+        for (int j = i; j <= MAXN; j += i)
+            num_div[j]++;
+}
+
+void divisors(){
+	for(int i = 1; i <= MAXN; i++){
+    	for(int j = i; j <= MAXN ; j += i){
+        	divisors[j].push_back(i);
+    	}
+	}
 }
 
 int32_t main(){
@@ -56,11 +56,6 @@ int32_t main(){
 	ios_base::sync_with_stdio(false); cin.tie(NULL);
 	#endif
 	// cin.exceptions(cin.Failbit);
-	int t = 1;	
-	// cin >> t;
-	for(int i = 1 ; i <= t ;i++){
-		// cout << "Case "<< i << ":\n";
-		check();
-	}
+	
 	return 0;
 }

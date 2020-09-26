@@ -1,4 +1,4 @@
-#pragma GCC optimize("Ofast")  
+#pragma GCC optimize("Ofast")  // remove in mingw32 bit ;
 #pragma GCC target("avx,avx2,fma") 
 #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("unroll-loops")
