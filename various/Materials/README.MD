@@ -52,9 +52,9 @@
     - [Explaination](https://www.youtube.com/watch?v=2izuGA8T8IE)
     - [Implementation](https://codeforces.com/blog/entry/58025)
     - [Algo-Live!](https://www.youtube.com/watch?v=3pk02p1-weU)
+- [Fenwick Tree and Centroid Decomposition](https://codeforces.com/blog/entry/83201)
 - [DFS-Tree and its Applications](https://codeforces.com/blog/entry/68138)
 - [Way to Navigate Grid](https://codeforces.com/blog/entry/78827)
 - [always use const auto& inside for loops](https://codeforces.com/blog/entry/77847)
 - [Modular for beginers](https://codeforces.com/blog/entry/72527)
 - [All Andrew Stankevich Contests at Gym](https://codeforces.com/blog/entry/7770)
-```
