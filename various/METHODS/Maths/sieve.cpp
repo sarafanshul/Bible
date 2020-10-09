@@ -4,18 +4,32 @@ using namespace std;
 
 const long long MAXN = 1e6 + 7;
 
-vector<bool> is_prime(MAXN+1, true);
-vector<long long> primes;
-void pre(){	
-	primes.reserve(MAXN);
-	is_prime[0] = is_prime[1] = false;
-	for (int i = 2; i * i <= MAXN; i++) {
-		if (is_prime[i]) {
-			for (int j = i * i; j <= MAXN; j += i)
-				is_prime[j] = false;
+template<long long SZ> struct Sieve {
+	bitset<SZ> pri;
+	vector<int> pr; pr.reserve(SZ);
+	Sieve() {
+		pri.set();
+		pri[0] = pri[1] = 0;
+		for (int i = 4; i < SZ; i += 2) {
+			pri[i] = 0;
+		}
+		for (int i = 3; i * i < SZ; i += 2) {
+			if (pri[i]) {
+				for (int j = i * i; j < SZ; j += 2 * i) {
+					pri[j] = 0;
+				}
+			}
+		}
+		for (int i = 0; i < SZ; i++) {
+			if (pri[i]) {
+				pr.push_back(i);
+			}
 		}
 	}
-	for(int i = 0 ;i < MAXN ;i++){
-		if(is_prime[i]) primes.push_back(i);
-	}
+};
+
+int main(){
+	Sieve<MAXN> S;
+	S.pri[10];
+	S.pr[11];
 }
