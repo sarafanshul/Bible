@@ -6,7 +6,7 @@ const long long MAXN = 1e6 + 7;
 
 template<long long SZ> struct Sieve {
 	bitset<SZ> pri;
-	vector<int> pr; pr.reserve(SZ);
+	vector<long long> pr;
 	Sieve() {
 		pri.set();
 		pri[0] = pri[1] = 0;
