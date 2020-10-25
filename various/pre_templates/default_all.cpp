@@ -35,13 +35,9 @@
 #define ll long long
 #define double long double
 #define MP make_pair
-// #define int long long
-// #define MAX LONG_LONG_MAX
-// #define MIN LONG_LONG_MIN
 using namespace __gnu_pbds;
 using namespace std;
-#ifdef CUST_DEBUG // </COMMENT> the {ostream operator} modification(for redifination conflicts) after endif
-template<class K, class V>ostream& operator<<(ostream&s,const pair<K,V>&p){s<<'<'<<p.x<<','<<p.y<<'>';return s;}
+#ifdef CUST_DEBUG
 template<class K, class V>ostream& operator<<(ostream&s,const pair<K,V>&p){s<<'<'<<p.F<<','<<p.S<<'>';return s;}
 template<class T, class=typename T::value_type, class=typename enable_if<!is_same<T,string>::value>::type>
 ostream& operator<<(ostream&s,const T&v){s<<'[';for(auto&x:v){s<<x<<", ";}if(!v.empty()){s<<"\b\b";}s<<']';return s;}
@@ -49,38 +45,39 @@ void __prnt(){cerr<<endl;} template<class T, class...Ts>void __prnt(T&&a,Ts&&...
 #define print(...) __prnt(__VA_ARGS__)
 #else
 #define print(...)
-#endif
 template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
 template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p){return cout<<"("<<p.F<<", "<<p.S<<")";}
 template<typename A> ostream& operator<<(ostream &cout,vector<A> const &v){cout<<"[";for(int i=0;i<v.size();i++){if(i)cout<<", ";cout<<v[i];}return cout<<"]";}
 template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p){cin>>p.F;return cin>>p.S;}
-
+#endif
 mt19937 gen(chrono::high_resolution_clock::now().time_since_epoch().count());
-const long long MAXN = 1e5 +7;
 
-// typedef tree<
-// 	long long, // Key type
-// 	null_type, // Mapped-policy
-// 	less<long long>, // Key comparison functor
-// 	rb_tree_tag, // Specifies which underlying data structure to use
-// 	tree_order_statistics_node_update> // A policy for updating node invariants
-// ordered_set;
+typedef tree<
+	long long, // Key type
+	null_type, // Mapped-policy
+	less<long long>, // Key comparison functor
+	rb_tree_tag, // Specifies which underlying data structure to use
+	tree_order_statistics_node_update> // A policy for updating node invariants
+ordered_set;
 
+template<typename T>
+using min_heap = priority_queue<T, vector<T>, greater<T>>;
+
+const long long MAXN = 1e6+7;
 
 void check(){
-	
+	cout << "WORKS";
 }
 
 signed main(){
 	#ifndef CUST_DEBUG
 	ios_base::sync_with_stdio(false); cin.tie(NULL);
-	#endif
-	#ifdef CUST_DEBUG
+	#else
 	cerr << "Runtime is: " << clock() * 1.0 / CLOCKS_PER_SEC << '\n';
 	#endif
-	int t = 1;	
+	uint64_t t = 1;	
 	// cin >> t;
-	for(int i = 1 ; i <= t ;i++){
+	for(uint64_t i = 1 ; i <= t ;i++){
 		// cout << "Case "<< i << ":\n";
 		check();
 	}
