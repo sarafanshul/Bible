@@ -177,3 +177,6 @@ set shiftwidth=4
 nnoremap o o<Esc>
 nnoremap O O<Esc>
 
+
+" maxmize on startup
+set lines=999 columns=75 
