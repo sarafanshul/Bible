@@ -1,89 +1,46 @@
-// coordinate compression (slower without pbds)
+// coordinate compression
 // Coordinate Compression is mainly used to map larger 
-// 	values to smaller values to remove the vacant space
-
-// https://www.quora.com/What-is-coordinate-compression-and-what-is-it-used-for
-
-
-// pragma for fast runtime optimization
-// // #pragma GCC optimize("O3")
-#pragma GCC optimize("Ofast")  
-#pragma GCC target("avx,avx2,fma") 
-#pragma comment(linker, "/stack:200000000")
-#pragma GCC optimize("unroll-loops")
-
-// header(s)
+//  values to smaller values to remove the vacant space
+// https://codeforces.com/blog/entry/84164
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;using namespace __gnu_pbds;
 
-// custom aliases
-#define ALL(x) x.begin(),x.end()
-#define PB push_back
-#define EB emplace_back
-#define F first
-#define S second
-#define ll long long
-#define MP make_pair
-// // for overflow
-// #define int long long
-// #define MAX LONG_LONG_MAX
-// #define MIN LONG_LONG_MIN
+const long long MAXN = 1e6 +7;
 
-// namespaces
-using namespace std;
-
-// global declerations
-const size_t MAXN = 1e5 +7;
-
-// FOR LONG LONG INTS (for unhackable hashing)
 struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
+	static uint64_t splitmix64(uint64_t x) {
+		x += 0x9e3779b97f4a7c15;
+		x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+		return x ^ (x >> 31); }
+	size_t operator()(uint64_t x) const {
+		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+		return splitmix64(x + FIXED_RANDOM); }
 };
 
-unordered_map< long long, long long, custom_hash> _keys ,_orig;
+// gp_hash_table/unordresd map will work too src- cses-1144 submission
+map<long long, long long ,custom_hash> M;
 
-long long idx = 1;
+vector<long long> b;
 
-template<class T = vector<long long>>
-void _store(T &v){
-    sort(ALL(v));
-    for(size_t i = 0 ; i < v.size() ; i++){
-        if( _keys.find(v[i]) == _keys.end() ){
-            _keys[v[i]] = idx; // for storing compression
-            _orig[idx] = v[i]; // for searching back
-            idx++;
-        }
-    }
-}
-
-template<class T = vector<long long>>
-void _extract(T &a){
-    for(size_t i = 0; i < a.size(); i++){
-        a[i] = _keys[a[i]]; // for appliting compression
-    }
-}
-
-template<class T = vector<long long>>
-void _compress(T &v , T &a){
-    _store(v); _extract(a); // {a ∈ v} 
+// Now every value of an array lies in [0, n). The most convineint it that if you need the original value for a[i], you can just write b[a[i]].
+void compress(vector<long long> &a){
+	b = a;
+	sort(b.begin(), b.end());
+	for(int i = 0 ;i < b.size() ;i++){
+		M[b[i]] = i;
+	}
+	for(int i = 0 ; i < b.size() ;i++){
+		a[i] = M[a[i]];
+	}
 }
 
 int32_t main(){
-    ios_base::sync_with_stdio(false); cin.tie(NULL); 
-    cin.exceptions(cin.failbit);
-    ll n = 1000000;
-    vector<ll> a(n);
-    iota(ALL(a) ,100000000);
-    _compress(a ,a);
-    return 0;
+	ll n = 1000000;
+	vector<ll> a(n);
+	// test 
+	iota(ALL(a) ,100000000);
+	compress(a);
+	return 0;
 }
