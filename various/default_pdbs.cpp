@@ -1,29 +1,25 @@
-
-#pragma GCC optimize("Ofast")  // remove in mingw32 bit ;
+#ifndef CUST_DEBUG
+#pragma GCC optimize("Ofast")
 #pragma GCC target("avx,avx2,fma") 
 #pragma comment(linker, "/stack:200000000")
 #pragma GCC optimize("unroll-loops")
+#endif
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 #include <ext/pb_ds/detail/standard_policies.hpp>
 #include <bits/stdc++.h>
 #define ALL(x) x.begin(),x.end()
 #define PB push_back
-#define EB emplace_back
 #define F first
 #define S second
 #define ll long long
 #define double long double
 #define MP make_pair
-// #define int long long
-// #define MAX LONG_LONG_MAX
-// #define MIN LONG_LONG_MIN
 
 using namespace __gnu_pbds;
 using namespace std;
 
-#ifdef CUST_DEBUG // </COMMENT> the {ostream operator} modification(for redifination conflicts) after endif
-template<class K, class V>ostream& operator<<(ostream&s,const pair<K,V>&p){s<<'<'<<p.x<<','<<p.y<<'>';return s;}
+#ifdef CUST_DEBUG
 template<class K, class V>ostream& operator<<(ostream&s,const pair<K,V>&p){s<<'<'<<p.F<<','<<p.S<<'>';return s;}
 template<class T, class=typename T::value_type, class=typename enable_if<!is_same<T,string>::value>::type>
 ostream& operator<<(ostream&s,const T&v){s<<'[';for(auto&x:v){s<<x<<", ";}if(!v.empty()){s<<"\b\b";}s<<']';return s;}
@@ -32,10 +28,6 @@ void __prnt(){cerr<<endl;} template<class T, class...Ts>void __prnt(T&&a,Ts&&...
 #else
 #define print(...)
 #endif
-template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v);
-template<typename A, typename B> ostream& operator<<(ostream &cout, pair<A, B> const &p){return cout<<"("<<p.F<<", "<<p.S<<")";}
-template<typename A> ostream& operator<<(ostream &cout,vector<A> const &v){cout<<"[";for(int i=0;i<v.size();i++){if(i)cout<<", ";cout<<v[i];}return cout<<"]";}
-template<typename A, typename B> istream& operator>>(istream& cin, pair<A, B> &p){cin>>p.F;return cin>>p.S;}
 
 typedef tree<
 	long long, // Key type
