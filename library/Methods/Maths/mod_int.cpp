@@ -1,4 +1,7 @@
 // from neal
+#ifdef double 
+#undef double
+#endif
 template<const int &MOD>
 struct _m_int {
 	int val;
