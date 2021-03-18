@@ -20,19 +20,6 @@ struct _m_int {
 	_m_int(int v) : _m_int(int64_t(v)) {}
 	_m_int(unsigned v) : _m_int(uint64_t(v)) {}
  
-	static int inv_mod(int a, int m = MOD) {
-		// https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Example
-		int g = m, r = a, x = 0, y = 1;
- 
-		while (r != 0) {
-			int q = g / r;
-			g %= r; swap(g, r);
-			x -= q * y; swap(x, y);
-		}
- 
-		return x < 0 ? x + m : x;
-	}
- 
 	explicit operator int() const { return val; }
 	explicit operator unsigned() const { return val; }
 	explicit operator int64_t() const { return val; }
@@ -104,8 +91,37 @@ struct _m_int {
 	friend bool operator<=(const _m_int &a, const _m_int &b) { return a.val <= b.val; }
 	friend bool operator>=(const _m_int &a, const _m_int &b) { return a.val >= b.val; }
  
+	static const int SAVE_INV = int(1e6) + 5;
+	static _m_int save_inv[SAVE_INV];
+ 
+	static void prepare_inv() {
+		// Make sure MOD is prime, which is necessary for the inverse algorithm below.
+		for (int64_t p = 2; p * p <= MOD; p += p % 2 + 1)
+			assert(MOD % p != 0);
+ 
+		save_inv[0] = 0;
+		save_inv[1] = 1;
+ 
+		for (int i = 2; i < SAVE_INV; i++)
+			save_inv[i] = save_inv[MOD % i] * (MOD - MOD / i);
+	}
+ 
 	_m_int inv() const {
-		return inv_mod(val);
+		if (save_inv[1] == 0)
+			prepare_inv();
+ 
+		if (val < SAVE_INV)
+			return save_inv[val];
+ 
+		_m_int product = 1;
+		int v = val;
+ 
+		while (v >= SAVE_INV) {
+			product *= MOD - MOD / v;
+			v = MOD % v;
+		}
+ 
+		return product * save_inv[v];
 	}
  
 	_m_int pow(int64_t p) const {
@@ -132,56 +148,65 @@ struct _m_int {
 	}
 };
  
-extern const int MOD = 1e9 + 7;
+template<const int &MOD> _m_int<MOD> _m_int<MOD>::save_inv[_m_int<MOD>::SAVE_INV];
+ 
+extern const int MOD = int(1e9) + 7;
 using mod_int = _m_int<MOD>;
  
-vector<mod_int> inv, factorial, inv_factorial;
-int prepared_maximum = -1;
+ 
+vector<mod_int> _factorial = {1, 1}, _inv_factorial = {1, 1};
  
 void prepare_factorials(int64_t maximum) {
-	static int prepare_calls = 0;
+	static int prepared_maximum = 1;
  
-	if (prepare_calls++ == 0) {
-		// Make sure MOD is prime, which is necessary for the inverse algorithm below.
-		for (int p = 2; p * p <= MOD; p += p % 2 + 1)
-			assert(MOD % p != 0);
+	if (maximum <= prepared_maximum)
+		return;
  
-		inv = {0, 1};
-		factorial = inv_factorial = {1, 1};
-		prepared_maximum = 1;
+	// Prevent increasing maximum by only 1 each time.
+	maximum += maximum / 16;
+	_factorial.resize(maximum + 1);
+	_inv_factorial.resize(maximum + 1);
+ 
+	for (int i = prepared_maximum + 1; i <= maximum; i++) {
+		_factorial[i] = i * _factorial[i - 1];
+		_inv_factorial[i] = _inv_factorial[i - 1] / i;
 	}
  
-	if (maximum > prepared_maximum) {
-		inv.resize(maximum + 1);
-		factorial.resize(maximum + 1);
-		inv_factorial.resize(maximum + 1);
+	prepared_maximum = int(maximum);
+}
  
-		for (int i = prepared_maximum + 1; i <= maximum; i++) {
-			inv[i] = inv[MOD % i] * (MOD - MOD / i);
-			factorial[i] = i * factorial[i - 1];
-			inv_factorial[i] = inv[i] * inv_factorial[i - 1];
-		}
+mod_int factorial(int n) {
+	if (n < 0) return 0;
+	prepare_factorials(n);
+	return _factorial[n];
+}
  
-		prepared_maximum = int(maximum);
-	}
+mod_int inv_factorial(int n) {
+	if (n < 0) return 0;
+	prepare_factorials(n);
+	return _inv_factorial[n];
 }
  
 mod_int choose(int64_t n, int64_t r) {
 	if (r < 0 || r > n) return 0;
-	return factorial[n] * inv_factorial[r] * inv_factorial[n - r];
-}
- 
-mod_int inv_choose(int64_t n, int64_t r) {
-	assert(0 <= r && r <= n);
-	return inv_factorial[n] * factorial[r] * factorial[n - r];
+	prepare_factorials(n);
+	return _factorial[n] * _inv_factorial[r] * _inv_factorial[n - r];
 }
  
 mod_int permute(int64_t n, int64_t r) {
 	if (r < 0 || r > n) return 0;
-	return factorial[n] * inv_factorial[n - r];
+	prepare_factorials(n);
+	return _factorial[n] * _inv_factorial[n - r];
+}
+ 
+mod_int inv_choose(int64_t n, int64_t r) {
+	assert(0 <= r && r <= n);
+	prepare_factorials(n);
+	return _inv_factorial[n] * _factorial[r] * _factorial[n - r];
 }
  
 mod_int inv_permute(int64_t n, int64_t r) {
 	assert(0 <= r && r <= n);
-	return inv_factorial[n] * factorial[n - r];
+	prepare_factorials(n);
+	return _inv_factorial[n] * _factorial[n - r];
 }

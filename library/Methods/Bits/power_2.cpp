@@ -1,0 +1,1 @@
+inline bool is_pow2(ll v){ return v && !(v & (v - 1)); }
