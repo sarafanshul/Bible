@@ -63,6 +63,18 @@ Segment Tree
 	AlgoGym SegTree
 	 https://codeforces.com/blog/entry/15890
 
+Kitamasa method
+	https://codeforces.com/blog/entry/88760
+
+Xor Hashing
+	https://codeforces.com/blog/entry/85900
+
+Grundy Numbers
+	https://codeforces.com/blog/entry/85900
+
+Matrix Exp
+	https://codeforces.com/blog/entry/80195
+
 
 
 win 1)
