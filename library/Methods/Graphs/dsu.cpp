@@ -1,34 +1,34 @@
-struct dsu {
+template<typename Monoid>
+struct DisjointSetUnion {
 	struct rnk {
-		int val = 1;
-		int get() const {
+		Monoid val = 1;
+		Monoid get() const {
 			return val;
 		}
 		void add(const rnk &r) {
 			val += r.val;
 		}
 	};
-	vector<int> p;
+	vector<Monoid> p;
 	vector<rnk> r;
-	int comp = 0, edge = 0;
-	dsu() {}
+	Monoid comp = 0, edge = 0;
+	DisjointSetUnion() {}
 	bool empty() const {
 		return p.empty();
 	}
-	dsu(int n) {
-		p = vector<int>(n);
+	DisjointSetUnion(Monoid n) {
+		p = vector<Monoid>(n);
 		r = vector<rnk>(n);
-		for (int i = 0; i < n; ++i)
-			p[i] = i;
+		iota( p.begin(), p.end() , (Monoid)0 ) ;
 		comp = n;
 	}
-	int getp(int v) { // returns head element in a set
+	Monoid getp(Monoid v) { // returns head element in a set
 		return v == p[v] ? v : p[v] = getp(p[v]);
 	}
-	bool check(int a, int b) { // a and b are in one component
+	bool check(Monoid a, Monoid b) { // a and b are in one component
 		return getp(a) == getp(b);
 	}
-	bool unite(int a, int b) { // a and b are in diff components
+	bool unite(Monoid a, Monoid b) { // a and b are in diff components
 		a = getp(a);
 		b = getp(b);
 		if (a == b) return false;

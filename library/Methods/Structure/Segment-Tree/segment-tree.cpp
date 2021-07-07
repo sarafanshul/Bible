@@ -1,4 +1,5 @@
 //https://github.com/ei1333
+// range = [l , r)
 template< typename Monoid, typename F >
 struct SegmentTree {
   int sz;
